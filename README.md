@@ -26,6 +26,8 @@ https://day.js.org/en/
 
 https://getbootstrap.com/
 
+https://fonts.google.com/
+
 ## License
 
 Please refer to the license in the repo.
