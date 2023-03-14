@@ -10,11 +10,11 @@ N/A
 
 ## Usage
 
-Website: https://tagne13.github.io/5-Work-Day-Scheduler/
+Website:  https://tagne13.github.io/6-Weather-Dashboard/
 
-Repository: https://github.com/Tagne13/5-Work-Day-Scheduler 
+Repository:  https://github.com/Tagne13/6-Weather-Dashboard.git 
 
-![Screenshot](Assets/Images/Screenshot.png)
+![Screenshot](assets/images/Screenshot.png)
 
 ## Credits
 
