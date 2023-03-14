@@ -1,0 +1,11 @@
+* {
+    font-family: 'Roboto', 'Arial';
+    font-weight: bold;
+}
+
+.header {
+    color: darkred;
+    background-color: azure;
+    text-align: center;
+    padding: 10px;
+}
