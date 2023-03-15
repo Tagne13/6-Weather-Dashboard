@@ -3,9 +3,13 @@
     font-weight: bold;
 }
 
-.header {
-    color: darkred;
+body {
     background-color: azure;
+}
+
+.header {
+    color: azure;
+    background-color: navy;
     text-align: center;
     padding: 10px;
 }

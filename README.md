@@ -20,6 +20,8 @@ Repository:  https://github.com/Tagne13/6-Weather-Dashboard.git
 
 Special thank you to tutor Andres Long through the Bootcamp tutor team for assistance with JavaScript debugging in the create schedule function. 
 
+https://openweathermap.org/
+
 https://jquery.com/
 
 https://day.js.org/en/
