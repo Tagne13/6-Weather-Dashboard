@@ -27,10 +27,16 @@
             <aside>
                 <h3>Search for city:</h3>
                 <div>
-                    <input type="text" placeholder="Enter city">
+                    <input id="city" type="text" placeholder="Enter city">
                     <div>
                         <button class="searchBtn">Search</button>
                     </div>
+                </div>
+                <p><em>E.g. Grand Rapids or Grand Rapids, MI, US or Rome, IT</em></p>
+                <hr>
+                <h3>Past searches <button id="clear-history" title="Clear search results"></button></h3>
+                <div id="search-history">
+                    <!-- Display search histoy here -->
                 </div>
             </aside>
         </div>
@@ -39,7 +45,7 @@
             <main>
                 <div class="row">
                     <div class="current">
-                        <h2 id="city-date"></h2>
+                        <h2 id="city-date"><img id="city-icon" src=""></h2>
                         <p id="city-temp"></p>
                         <p id="city-wind"></p>
                         <p id="city-humidity"></p>
