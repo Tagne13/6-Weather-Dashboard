@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     var APIKey = "c684f4a2d3c668932b65951d98472409";
     var currentURL = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}";
-    var futureURL = "api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
+    var futureURL = "https://api.openweathermap.org/data/2.5/forecast?lat={currentLat}&lon={currentLong}&exclude=current,minutely,hourly&appid=c684f4a2d3c668932b65";
 
     // Functions
 
@@ -45,11 +45,43 @@ $(document).ready(function () {
         cityHumidity.text(`Humidity: ${response.main.humidity}%`);
     };
         // 5 Day Forecast
+    $.ajax({
+        url: futureURL,
+        method: "GET"
+    })
+        .then(function (response) {
+            $('.day').each(function (day) {
+                day = day +1;
+                var dayStatus = dayjs.unix(response.daily[day].dt).format("MM/DD/YYYY");
+                var forecastIcon = response.daily[day].weather[0].icon;
+                var forecastIconURL = "https://openweathermap.org/img/wn/${forecastIcon}.png";
+                var forecastIconDescrip = response.daily[day].weather[0].description;
+                var forecastTempFar = (response.daily[day].temp.day - 273.15) * 1.80 + 32;
+                var forecastWind = response.daily[day].wind.speed;
+                var forecastHumidity = response.daily[day].humidity;
+                $($(this)[0].children[0].children[0]).text(dayStatus);
+                $($(this)[0].children[0].children[1]).children[0].attr("src", forecastIconURL).attr("alt", `${forecastIconDescrip}`).attr("title", `${forecastIconDescrip}`);
+                $($(this)[0].children[0].children[2]).text(`Temp: ${forecastTempFar.toFixed(2)} `);
+                $($(this)[0].children[0].children[3]).text(`Wind Speed: ${forecastWind} MPH`);
+                $($(this)[0].children[0].children[4]).text(`Humidity: ${forecastHumidity}%`);
+            });
+        })
 
         // Store search history
-    function storeSearch()
+    function storeSearch(searchedCity) {
+        localStorage.setItem("city" + localStorage.length, searchedCity);
+    }
 
         // Add searched cities to searched display
+    var storedSearchList = "";
+    function displaySearch() {
+        searchHistory.empty();
+        for (var i = 0; i < localStorage.length; i++) {
+            storedSearchList = localStorage.getItem("city" + i);
+            var searchHistoryBtn = $("<button>").text(storedSearchList).addClass("btn btn-primary button-srch m-2").attr("type", "submit");
+            searchHistory.append(searchHistoryBtn);
+        }
+    }
 
     // Event Listeners
     searchBtn.on("click", function (event) {
