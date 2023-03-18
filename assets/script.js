@@ -1,9 +1,9 @@
 $(document).ready(function () {
     // Search Variables
-    const searchBtn = $('.searchBtn');
-    const clearBtn = $('#clear-history');
-    let searchCity = $('#search-city');
-    let searchHistory = $('#search-history');
+    const searchBtn = $("#searchBtn");
+    const clearBtn = $("#clear-history");
+    var searchCity = $("#city");
+    var searchHistory = $("#search-history");
     var city = "";
 
     // Current Variables
