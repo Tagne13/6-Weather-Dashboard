@@ -18,84 +18,86 @@
 
 <body>
     <header class="header">
-        <h1>Local Weather Forecast</h1>
+        <h1 class="display-4">Local Weather Forecast</h1>
     </header>
     <div class="container">
-        <div class="row"></div>
+        <div class="row">
         <!-- Div for search area -->
-        <div>
-            <aside>
+            <aside class="pr-4">
+                <!-- Search header -->
                 <h3>Search for city:</h3>
-                <div>
-                    <input id="city" type="text" placeholder="Enter city">
-                    <div>
-                        <button class="searchBtn">Search</button>
+                <!-- Search box and button -->
+                <div class="input-group mb-3">
+                    <input id="city" type="text" class="form-control" placeholder="Enter city" aria-label="Search city box" aria-describedby="button-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" id="searchBtn" aria-label="Submit search button" title="Submit search"><i class="fas fa-search-location fa-2x"></i></button>
                     </div>
                 </div>
                 <p><em>E.g. Grand Rapids or Grand Rapids, MI, US or Rome, IT</em></p>
                 <hr>
-                <h3>Past searches <button id="clear-history" title="Clear search results"></button></h3>
+                <!-- Div for previously searched cities -->
+                <h3>Past searches <button class="btn btn-primary" id="clear-history" title="Clear search results" aria-label="Clear search results button"><i class="fa fa-trash"></i></button></h3>
                 <div id="search-history">
-                    <!-- Display search histoy here -->
+                    <!-- Display search history here -->
                 </div>
             </aside>
         </div>
         <!-- Current Conditions -->
-        <div>
+        <div class="col-md-9">
             <main>
                 <div class="row">
-                    <div class="current">
-                        <h2 id="city-date"><img id="city-icon" src=""></h2>
+                    <div class=" col-12 border-bottom border-left border-bottom border-dark current">
+                        <h2 id="city-date"><img id="city-icon" src="" alt=""></h2>
                         <p id="city-temp"></p>
                         <p id="city-wind"></p>
                         <p id="city-humidity"></p>
                     </div>
                 </div>
                 <!-- 5 Day Forecast -->
-                <div>
-                    <div class="forecast">
+                <div class="row mb-5">
+                    <div class="col-12 border-left border-bottom border-dark p-2 forecast">
                         <h2>5 Day Forecast</h2>
                         <div>
                             <div class="day">
-                                <div class="day-body">
+                                <div class="day-body p-2">
                                     <h5 class="day-date"></h5>
-                                    <p class="day-icon"></p>
+                                    <p class="day-icon"><img class="weather-icon" src="" alt=""></p>
                                     <p class="day-temp"></p>
                                     <p class="day-wind"></p>
                                     <p class="day-humidity"></p>
                                 </div>
                             </div>
                             <div class="day">
-                                <div class="day-body">
+                                <div class="day-body p-2">
                                     <h5 class="day-date"></h5>
-                                    <p class="day-icon"></p>
+                                    <p class="day-icon"><img class="weather-icon" src="" alt=""></p>
                                     <p class="day-temp"></p>
                                     <p class="day-wind"></p>
                                     <p class="day-humidity"></p>
                                 </div>
                             </div>
                             <div class="day">
-                                <div class="day-body">
+                                <div class="day-body p-2">
                                     <h5 class="day-date"></h5>
-                                    <p class="day-icon"></p>
+                                    <p class="day-icon"><img class="weather-icon" src="" alt=""></p>
                                     <p class="day-temp"></p>
                                     <p class="day-wind"></p>
                                     <p class="day-humidity"></p>
                                 </div>
                             </div>
                             <div class="day">
-                                <div class="day-body">
+                                <div class="day-body p-2">
                                     <h5 class="day-date"></h5>
-                                    <p class="day-icon"></p>
+                                    <p class="day-icon"><img class="weather-icon" src="" alt=""></p>
                                     <p class="day-temp"></p>
                                     <p class="day-wind"></p>
                                     <p class="day-humidity"></p>
                                 </div>
                             </div>
                             <div class="day">
-                                <div class="day-body">
+                                <div class="day-body p-2">
                                     <h5 class="day-date"></h5>
-                                    <p class="day-icon"></p>
+                                    <p class="day-icon"><img class="weather-icon" src="" alt=""></p>
                                     <p class="day-temp"></p>
                                     <p class="day-wind"></p>
                                     <p class="day-humidity"></p>
