@@ -16,15 +16,13 @@ $(document).ready(function () {
     // Date
     const todayDate = dayjs();
 
-
-    var APIKey = "c684f4a2d3c668932b65951d98472409";
-    var currentURL = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}";
-    var futureURL = "https://api.openweathermap.org/data/2.5/forecast?lat={currentLat}&lon={currentLong}&exclude=current,minutely,hourly&appid=c684f4a2d3c668932b65";
-
     // Functions
 
         // Find current Weather 
     function currentQueryURL() {
+        var currentURL = "https://api.openweathermap.org/data/2.5/weather?";
+        var APIKey = {"APPID": "c684f4a2d3c668932b65951d98472409"};
+
         APIKey.q = searchCity
             .val()
             .trim();
@@ -33,18 +31,25 @@ $(document).ready(function () {
 
         // Generate content based on API response
     function findCurrentWeather(response) {
+        // Weather icon details
         var weatherIcon = response.weather[0].icon;
         var weatherIconURL = `https://openweathermap.org/img/wn/${weatherIcon}.png`;
         var weatherIconDescrip = response.weather[0].description;
+        // Convert temp to Fahrenheit
         var tempFar = (response.main.temp - 273.15) * 1.80 + 32;
+        // City name
         city = response.name;
+        // Current weather details
         cityHeader.text(`${city} (${todayDate.format("MM/DD/YYYY")})`);
         cityHeader.append(cityIcon.attr("src", weatherIconURL).attr("alt", `${weatherIconDescrip}`).attr("title", `${weatherIconDescrip}`));
-        cityTemp.text(`Temperature: ${tempFar.toFixed(2)} `);
+        cityTemp.text(`Temperature: ${tempFar.toFixed(2)} ℉`);
         cityWind.text(`Wind Speed: ${response.wind.speed} MPH`);
         cityHumidity.text(`Humidity: ${response.main.humidity}%`);
     };
         // 5 Day Forecast
+        var currentLat = response.coord.lat;
+        var currentLong = response.coord.lon;
+        var futureURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentLat}&lon=${currentLong}&exclude=current,minutely,hourly&appid=c684f4a2d3c668932b65`;
     $.ajax({
         url: futureURL,
         method: "GET"
@@ -54,14 +59,14 @@ $(document).ready(function () {
                 day = day +1;
                 var dayStatus = dayjs.unix(response.daily[day].dt).format("MM/DD/YYYY");
                 var forecastIcon = response.daily[day].weather[0].icon;
-                var forecastIconURL = "https://openweathermap.org/img/wn/${forecastIcon}.png";
+                var forecastIconURL = `https://openweathermap.org/img/wn/${forecastIcon}.png`;
                 var forecastIconDescrip = response.daily[day].weather[0].description;
                 var forecastTempFar = (response.daily[day].temp.day - 273.15) * 1.80 + 32;
                 var forecastWind = response.daily[day].wind.speed;
                 var forecastHumidity = response.daily[day].humidity;
                 $($(this)[0].children[0].children[0]).text(dayStatus);
                 $($(this)[0].children[0].children[1]).children[0].attr("src", forecastIconURL).attr("alt", `${forecastIconDescrip}`).attr("title", `${forecastIconDescrip}`);
-                $($(this)[0].children[0].children[2]).text(`Temp: ${forecastTempFar.toFixed(2)} `);
+                $($(this)[0].children[0].children[2]).text(`Temp: ${forecastTempFar.toFixed(2)} ℉`);
                 $($(this)[0].children[0].children[3]).text(`Wind Speed: ${forecastWind} MPH`);
                 $($(this)[0].children[0].children[4]).text(`Humidity: ${forecastHumidity}%`);
             });
@@ -93,6 +98,16 @@ $(document).ready(function () {
 
         $ajax({
             url: queryURL,
+            method: "GET"
+        })
+            .then(findCurrentWeather);
+    });
+
+    $(document).on("click", ".searchBtn", function () {
+        var prevCity = $(this).text();
+        storeSearch(prevCity);
+        $.ajax({
+            url: `https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d9847&q=${prevCity}`,
             method: "GET"
         })
             .then(findCurrentWeather);
