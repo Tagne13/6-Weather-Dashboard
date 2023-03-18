@@ -83,7 +83,7 @@ $(document).ready(function () {
         searchHistory.empty();
         for (var i = 0; i < localStorage.length; i++) {
             storedSearchList = localStorage.getItem("city" + i);
-            var searchHistoryBtn = $("<button>").text(storedSearchList).addClass("btn btn-primary button-srch m-2").attr("type", "submit");
+            var searchHistoryBtn = $("<button>").text(storedSearchList).addClass("btn btn-primary button-search m-2").attr("type", "submit");
             searchHistory.append(searchHistoryBtn);
         }
     }
@@ -103,7 +103,7 @@ $(document).ready(function () {
             .then(findCurrentWeather);
     });
 
-    $(document).on("click", ".searchBtn", function () {
+    $(document).on("click", ".button-search", function () {
         var prevCity = $(this).text();
         storeSearch(prevCity);
         $.ajax({
@@ -126,9 +126,9 @@ $(document).ready(function () {
         var lastCity = localStorage.getItem("city" + (localStorage.length - 1));
         var qurl = "";
         if (localStorage.length === 0) {
-            qurl = "https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d98472409&q=Detroit";
+            qurl = `https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d98472409&q=Detroit`;
         } else {
-            qurl = "https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d98472409&q=${lastCity}";
+            qurl = `https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d98472409&q=${lastCity}`;
         }
         $.ajax({
             url: qurl,
