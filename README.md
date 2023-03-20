@@ -2,7 +2,7 @@
 
 ## Description
 
-This assignment application implements newly instructed upon code from 3rd party APIs jQuery and Day.js in addition to previously learned HTML, CSS, and JavaScript. The user will be able to add to-do tasks into a standard work day schedule and save them for planning purposes. This application helped teach me how to implement jQuery and Day.js as supplements to JavaScript. 
+This assignment application implements newly instructed upon usage of server-side APIs in addition to previously learned HTML, CSS, and JavaScript. The user will be able to enter a city and perform a search to find current weather conditions for that location. A 5-day weather forecast will also be displayed. The location can be saved in the search hisotry for future reference, or the search history can be cleared and a default city will be displayed. 
 
 ## Installation
 
@@ -18,7 +18,7 @@ Repository:  https://github.com/Tagne13/6-Weather-Dashboard.git
 
 ## Credits
 
-Special thank you to tutor Andres Long through the Bootcamp tutor team for assistance with JavaScript debugging in the create schedule function. 
+Special thank you to tutor Andres Long through the Bootcamp tutor team for assistance with JavaScript debugging using the OpenWeather API. Also thank you to Geraldo Gonzalez for assistance with JavaScript. 
 
 https://openweathermap.org/
 
