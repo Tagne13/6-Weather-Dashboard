@@ -18,23 +18,26 @@ $(document).ready(function () {
 
     // Functions
 
-        // Find current Weather 
+    // Find current Weather 
     function currentQueryURL() {
         // API URL
         var currentURL = `https://api.openweathermap.org/data/2.5/weather?`;
 
         // Build object for API call
-        var APIKey = {"APPID": "c684f4a2d3c668932b65951d98472409"};
+        var APIKey = { "APPID": "f3e794b6f19299364c3a368c93f4e895" };
+
         // Search term
         APIKey.q = searchCity
             .val()
             .trim();
-            // Generate URL
+
+        // Generate URL
         return currentURL + $.param(APIKey);
     }
 
-        // Generate page content based on API response
+    // Generate page content based on API response
     function findCurrentWeather(response) {
+
         // Weather icon details
         var weatherIcon = response.weather[0].icon;
         var weatherIconURL = `https://openweathermap.org/img/wn/${weatherIcon}.png`;
@@ -49,51 +52,54 @@ $(document).ready(function () {
         cityTemp.text(`Temperature: ${tempFar.toFixed(2)} ℉`);
         cityWind.text(`Wind Speed: ${response.wind.speed} MPH`);
         cityHumidity.text(`Humidity: ${response.main.humidity}%`);
-    };
         // 5 Day Forecast
         var currentLat = response.coord.lat;
         var currentLong = response.coord.lon;
-        var futureURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentLat}&lon=${currentLong}&exclude=current,minutely,hourly&appid=c684f4a2d3c668932b65`;
-        // AJAX for current 5-day forecase
-    $.ajax({
-        url: futureURL,
-        method: "GET"
-    })
-        .then(function (response) {
-            $('.day').each(function(day) {
-                day = day +1;
-                // Forecast date
-                var dayStatus = dayjs.unix(response.daily[day].dt).format("MM/DD/YYYY");
-                // Weather icon details
-                var forecastIcon = response.daily[day].weather[0].icon;
-                var forecastIconURL = `https://openweathermap.org/img/wn/${forecastIcon}.png`;
-                var forecastIconDescrip = response.daily[day].weather[0].description;
-                // Temperature; converted to Fahrenheit
-                var forecastTempFar = (response.daily[day].temp.day - 273.15) * 1.80 + 32;
-                // Wind speed
-                var forecastWind = response.daily[day].wind.speed;
-                // Humidity
-                var forecastHumidity = response.daily[day].humidity;
-                // Fill out forecast
-                    // Date
-                $($(this)[0].children[0].children[0]).text(dayStatus);
-                    // Weather Icon
-                $($(this)[0].children[0].children[1]).children[0].attr("src", forecastIconURL).attr("alt", `${forecastIconDescrip}`).attr("title", `${forecastIconDescrip}`);
-                    // Temperature
-                $($(this)[0].children[0].children[2]).text(`Temp: ${forecastTempFar.toFixed(2)} ℉`);
-                    // Wind speed
-                $($(this)[0].children[0].children[3]).text(`Wind Speed: ${forecastWind} MPH`);
-                    // Humidity
-                $($(this)[0].children[0].children[4]).text(`Humidity: ${forecastHumidity}%`);
-            });
-        })
+        var futureURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentLat}&lon=${currentLong}&exclude=current,minutely,hourly&appid=f3e794b6f19299364c3a368c93f4e895`;
 
-        // Store search history
+        // AJAX for current 5-day forecase
+        $.ajax({
+            url: futureURL,
+            method: "GET"
+        })
+            .then(function (response) {
+                $(".day").each(function (day) {
+                    var day = day + 1
+                    $(this).html("")
+                    // Forecast date
+                    var dayStatus = dayjs.unix(response.daily[day].dt).format("MM/DD/YYYY");
+                    // Weather icon details
+                    var forecastIcon = response.daily[day].weather[0].icon;
+                    var forecastIconURL = `https://openweathermap.org/img/wn/${forecastIcon}.png`;
+                    var forecastIconDescrip = response.daily[day].weather[0].description;
+                    // Temperature; converted to Fahrenheit
+                    var forecastTempFar = ((response.daily[day].temp.day - 273.15) * 1.80 + 32).toFixed(2);
+                    // Wind speed
+                    var forecastWind = response.daily[day].wind_speed;
+                    // Humidity
+                    var forecastHumidity = response.daily[day].humidity;
+                    // Fill out forecast
+                    console.log(dayStatus, forecastIcon, forecastIconURL, forecastIconDescrip, forecastTempFar, forecastWind, forecastHumidity);
+                    var newDiv = $("<div>").attr("class", "day-body p-2");
+                    var newDate = $("<h5>").attr("class", "day-date").text(dayStatus);
+                    var newIcon = $("<p>").attr("class", "day-icon").html("<img class='weather-icon' src=" + forecastIconURL + " />");
+                    var newTemp = $("<p>").attr("class", "day-temp").text(`Temperature: ` + forecastTempFar + `℉`);
+                    var newWind = $("<p>").attr("class", "day-wind").text(`Wind Speed: ` + forecastWind +  `MPH`);
+                    var newHumidity = $("<p>").attr("class", "day-humidity").text(`Humidity: ` + forecastHumidity + `%`);
+
+                    newDiv.append(newDate, newIcon, newTemp, newWind, newHumidity)
+
+                    $(this).append(newDiv)
+                });
+            })
+    };
+
+    // Store search history
     function storeSearch(searchedCity) {
         localStorage.setItem("city" + localStorage.length, searchedCity);
     }
 
-        // Add searched cities to searched display
+    // Add searched cities to searched display
     var storedSearchList = "";
     function displaySearch() {
         searchHistory.empty();
@@ -108,12 +114,13 @@ $(document).ready(function () {
     // Event Listeners
     searchBtn.on("click", function (event) {
         event.preventDefault();
-        storeSearch(searchTerm[0].value.trim());
+        var searchTerm = $("#city").val()
+        storeSearch(searchTerm);
         displaySearch();
 
         var queryURL = currentQueryURL();
 
-        $ajax({
+        $.ajax({
             url: queryURL,
             method: "GET"
         })
@@ -124,7 +131,7 @@ $(document).ready(function () {
         var prevCity = $(this).text();
         storeSearch(prevCity);
         $.ajax({
-            url: `https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d9847&q=${prevCity}`,
+            url: `https://api.openweathermap.org/data/2.5/weather?appid=f3e794b6f19299364c3a368c93f4e895&q=${prevCity}`,
             method: "GET"
         })
             .then(findCurrentWeather);
@@ -138,19 +145,18 @@ $(document).ready(function () {
     });
 
     // Load default city or last search item
-    $(window).on("load", function () {
-        displaySearch();
-        var lastCity = localStorage.getItem("city" + (localStorage.length - 1));
-        var qurl = "";
-        if (localStorage.length === 0) {
-            qurl = `https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d98472409&q=Detroit`;
-        } else {
-            qurl = `https://api.openweathermap.org/data/2.5/weather?appid=c684f4a2d3c668932b65951d98472409&q=${lastCity}`;
-        }
-        $.ajax({
-            url: qurl,
-            method: "GET"
-        })
-            .then(findCurrentWeather);
-    });
+    displaySearch();
+    var lastCity = localStorage.getItem("city" + (localStorage.length - 1));
+    var qurl = "";
+    if (localStorage.length === 0) {
+        qurl = `https://api.openweathermap.org/data/2.5/weather?appid=f3e794b6f19299364c3a368c93f4e895&q=Detroit`;
+    } else {
+        qurl = `https://api.openweathermap.org/data/2.5/weather?appid=f3e794b6f19299364c3a368c93f4e895&q=${lastCity}`;
+    }
+    $.ajax({
+        url: qurl,
+        method: "GET"
+    })
+        .then(findCurrentWeather);
+
 });
