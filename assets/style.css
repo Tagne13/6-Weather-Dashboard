@@ -10,10 +10,10 @@ html, body {
 body {
     background-color: azure;
     display: flex;
-    flex-direction: column;
+    flex-direction: column
 }
 
-.container {
+.container-fluid {
     flex: 1 0 auto;
 }
 
