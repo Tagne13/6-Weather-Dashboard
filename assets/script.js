@@ -79,8 +79,8 @@ $(document).ready(function () {
                     // Humidity
                     var forecastHumidity = response.daily[day].humidity;
                     // Fill out forecast
-                    console.log(dayStatus, forecastIcon, forecastIconURL, forecastIconDescrip, forecastTempFar, forecastWind, forecastHumidity);
-                    var newDiv = $("<div>").attr("class", "day-body p-2");
+                    // console.log(dayStatus, forecastIcon, forecastIconURL, forecastIconDescrip, forecastTempFar, forecastWind, forecastHumidity);
+                    var newDiv = $("<div>").attr("class", "day-body border-left border-bottom border-dark p-2");
                     var newDate = $("<h5>").attr("class", "day-date").text(dayStatus);
                     var newIcon = $("<p>").attr("class", "day-icon").html("<img class='weather-icon' src=" + forecastIconURL + " />");
                     var newTemp = $("<p>").attr("class", "day-temp").text(`Temperature: ` + forecastTempFar + `℉`);
