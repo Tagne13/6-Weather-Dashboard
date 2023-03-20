@@ -20,66 +20,65 @@
     <header class="header">
         <h1 class="display-4">Local Weather Forecast</h1>
     </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3 aside-col border-right border-bottom border-dark">
-                <!-- Div for search area -->
-                <aside class="pr-4 m-3 p-3">
-                    <!-- Search header -->
-                    <h3>Search for city:</h3>
-                    <!-- Search box and button -->
-                    <div class="input-group mb-3">
-                        <input id="city" type="text" class="form-control" placeholder="Enter city"
-                            aria-label="Search city box" aria-describedby="button-search">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary p-2 m-2" type="submit" id="searchBtn"
-                                aria-label="Submit search button" title="Submit search">Search<i
-                                    class="fas fa-search-location fa-2x"></i></button>
-                        </div>
+    <div class="row">
+        <div class="col-md-3 aside-col border-right border-bottom border-dark">
+            <!-- Div for search area -->
+            <aside class="pr-4 m-3 p-3">
+                <!-- Search header -->
+                <h3>Search for city:</h3>
+                <!-- Search box and button -->
+                <div class="input-group mb-3">
+                    <input id="city" type="text" class="form-control" placeholder="Enter city"
+                        aria-label="Search city box" aria-describedby="button-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary p-2 m-2" type="submit" id="searchBtn"
+                            aria-label="Submit search button" title="Submit search">Search<i
+                                class="fas fa-search-location fa-2x"></i></button>
                     </div>
-                    <p><em>E.g. Detroit or Detroit, MI, US or Rome, IT</em></p>
-                    <hr>
-                    <!-- Div for previously searched cities -->
-                    <h3>Past searches: <button class="btn btn-primary" id="clear-history" title="Clear search results"
-                            aria-label="Clear search results button">Clear history<i class="fa fa-trash"></i></button>
-                    </h3>
-                    <div id="search-history">
-                        <!-- Display search history here -->
-                    </div>
-                </aside>
-            </div>
-        <!-- Current Conditions -->
-            <div class="col-md-9">
-                <main>
-                    <div class="row">
-                        <div class="col-12 m-1 border-bottom border-left border-bottom border-dark current">
-                            <h2 id="city-date"><img id="city-icon" src="" alt=""></h2>
-                            <p id="city-temp"></p>
-                            <p id="city-wind"></p>
-                            <p id="city-humidity"></p>
-                        </div>
-                    </div>
-                <!-- 5 Day Forecast -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>5 Day Forecast</h2>
-                            <div>
-                                <div class="day col-2 p-2">
-                                </div>
-                                <div class="day col-2 p-2">
-                                </div>
-                                <div class="day col-2 p-2">
-                                </div>
-                                <div class="day col-2 p-2">
-                                </div>
-                                <div class="day col-2 p-2">
-                                </div>
-                            </div>
-                        </div>
-                     </div>
-                </main>
-            </div>
+                </div>
+                <p><em>E.g. Detroit or Detroit, MI, US or Rome, IT</em></p>
+                <hr>
+                <!-- Div for previously searched cities -->
+                <h3>Past searches: <button class="btn btn-primary" id="clear-history" title="Clear search results"
+                        aria-label="Clear search results button">Clear history<i class="fa fa-trash"></i></button>
+                </h3>
+                <div id="search-history">
+                    <!-- Display search history here -->
+                </div>
+            </aside>
         </div>
+        <!-- Current Conditions -->
+        <div class="col-md-9">
+            <main>
+                <div class="row">
+                    <div class="col-12 m-1 border-bottom border-left border-bottom border-dark current">
+                        <h2 id="city-date"><img id="city-icon" src="" alt=""></h2>
+                        <p id="city-temp"></p>
+                        <p id="city-wind"></p>
+                        <p id="city-humidity"></p>
+                    </div>
+                </div>
+                <!-- 5 Day Forecast -->
+                <div class="container">
+                    <div class="row">
+                        <h2>5 Day Forecast</h2>
+
+                        <div class="day col-sm p-2">
+                        </div>
+                        <div class="day col-sm p-2">
+                        </div>
+                        <div class="day col-sm p-2">
+                        </div>
+                        <div class="day col-sm p-2">
+                        </div>
+                        <div class="day col-sm p-2">
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </main>
+    </div>
+    </div>
     </div>
     <!-- Script Files -->
     <!-- JS for Bootstrap -->
